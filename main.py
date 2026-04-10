@@ -1,22 +1,51 @@
-import serial
-import time
-from modbus import *
+from tkinter import *
+vitesse_transmission = "9600"
+port_usb = "COM20"
 
-def envoyer_donnees():
-    PORT = port_usb
+fenetre = Tk()
 
-    requete = bytes([0x01,0x03,0x00,0x00, 0x00, 0x05, 0x85, 0xC9])
+fenetre.title("Capteur modbus rs485")
+fenetre.geometry("600x500")
 
-    ser = serial.Serial(PORT, int(vitesse_transmission), timeout=1)
+titre = Label(fenetre, text="Interface IHM pour capteur modbus rs485",bg="yellow",pady=20)
+titre.pack(fill="x")
 
-    ser.write(requete)
+frame_configuration = LabelFrame(fenetre, text="Configuration",pady=10, padx=10)
+frame_configuration.pack(fill="x",padx=10,expand=True)
 
-    time.sleep(0.1)
+statut_alarme = Label(frame_configuration,height=2,width=5,bg="green",text="RAS")
+statut_alarme.pack(side="left")
 
-    reponse = ser.read(15)
+BAUDRATE_label = Label(frame_configuration, text="Vitesse de transmission : ", padx=10)
+BAUDRATE_label.pack(side="left")
 
-    print(reponse)
+BAUDRATE = Entry(frame_configuration,width=10)
+BAUDRATE.insert(0,vitesse_transmission)
+BAUDRATE.pack(side="left")
 
-    ser.close()
+port_label = Label(frame_configuration,text="Port : ",padx=20)
+port_label.pack(side="left")
 
-    return reponse
+port = Entry(frame_configuration,width=10)
+port.insert(0,port_usb)
+port.pack(side="left")
+
+frame_requete_modbus = LabelFrame(fenetre, text="Requête Modbus", pady=10, padx=10)
+frame_requete_modbus.pack(fill="x", padx=10,expand=True)
+
+requete_label = Label(frame_requete_modbus, text="Requête", padx=20)
+requete_label.pack(side="left")
+
+requete = Entry(frame_requete_modbus, width=50)
+requete.pack(side="left")
+
+Envoyer = Button(frame_requete_modbus, text="Envoyer", command=envoyer_donnees)
+Envoyer.pack(side="right")
+
+frame_reponse_modbus = LabelFrame(fenetre, text="Données reçues", pady=10, padx=10)
+frame_reponse_modbus.pack(fill="x", padx=10,expand=True)
+
+reponse_label = Label(frame_reponse_modbus, text=reponse, padx=20)
+reponse_label.pack(side="left")
+
+fenetre.mainloop()
