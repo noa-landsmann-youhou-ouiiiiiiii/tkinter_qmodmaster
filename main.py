@@ -45,7 +45,7 @@ Envoyer.pack(side="right")
 frame_reponse_modbus = LabelFrame(fenetre, text="Données reçues", pady=10, padx=10)
 frame_reponse_modbus.pack(fill="x", padx=10,expand=True)
 
-reponse_label = Label(frame_reponse_modbus, text=reponse, padx=20)
+reponse_label = Label(frame_reponse_modbus, text="reponse", padx=20)
 reponse_label.pack(side="left")
 
 fenetre.mainloop()
