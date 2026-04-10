@@ -1,6 +1,6 @@
 import serial
 import time
-from ihm import *
+from modbus import *
 
 def envoyer_donnees():
     PORT = port_usb
