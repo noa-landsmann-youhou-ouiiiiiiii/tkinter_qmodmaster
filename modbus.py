@@ -1,6 +1,6 @@
 from tkinter import *
-import capteur_scada
-from capteur_scada import reponse,envoyer_donnees
+import main
+from main import reponse,envoyer_donnees
 
 vitesse_transmission = "9600"
 port_usb = "COM20"
